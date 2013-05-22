@@ -69,7 +69,7 @@ public class Start extends JPanel{
 		return y;
 	}
 	
-	
+	//Grafik Hoch
 	public void painth(Graphics g){
 		super.paintComponent(g);
 		int w = imgh.getWidth(this);
@@ -79,6 +79,7 @@ public class Start extends JPanel{
 					f2.drawImage(imgh,w,h,x,y,this);
 
 		}}
+	//Grafik Rechts
 	public void paintr(Graphics g){
 		super.paintComponent(g);
 		int w = imgr.getWidth(this);
@@ -88,6 +89,7 @@ public class Start extends JPanel{
 					f2.drawImage(imgr,w,h,x,y,this);
 
 		}}
+	//Grafik Links
 	public void paintl(Graphics g){
 		super.paintComponent(g);
 		int w = imgl.getWidth(this);
@@ -97,7 +99,6 @@ public class Start extends JPanel{
 					f2.drawImage(imgl,w,h,x,y,this);
 
 		}}
-
 	public void paint(Graphics g){
 		super.paintComponent(g);
 		int w = img.getWidth(this);
@@ -116,7 +117,8 @@ public class Start extends JPanel{
 			}**/
 		}
 	}
-	public void draw(Graphics g)
+	//Grafik Vorne
+	public void paintv(Graphics g)
 	{
 		super.paintComponent(g);
 		int w = imgr.getWidth(this);
@@ -126,3 +128,5 @@ public class Start extends JPanel{
 					f2.drawImage(imgr,w,h,this);
 	}}
 }
+
+
