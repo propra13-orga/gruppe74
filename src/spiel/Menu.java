@@ -5,26 +5,28 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.*;
 
-public class menu extends JFrame implements ActionListener{
-	private JButton schliessen;
+public class Menu extends JFrame implements ActionListener{
+	private JButton starten;
 	private JButton settings;
 	private JButton info;
 	private JButton ende;
+	//public static Start Start;
+	static boolean level1 = false;
 	
 	public static void main(String[] args){
-		menu menu = new menu("MENU");
+		Menu menu = new Menu("MENU");
 		menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		menu.setSize(400, 400);
 		
 		menu.setLayout(null);
 		menu.setVisible(true);
 	}
-	public menu(String title){
+	public Menu(String title){
 		super(title);
-		schliessen = new JButton("Spiel starten");
-		schliessen.setBounds(120, 40, 160, 40);
-		schliessen.addActionListener(this);
-		add(schliessen);
+		starten = new JButton("Spiel starten");
+		starten.setBounds(120, 40, 160, 40);
+		starten.addActionListener(this);
+		add(starten);
 		
 		settings = new JButton("Einstellung");
 		settings.setBounds(120, 120, 160, 40);
@@ -42,7 +44,7 @@ public class menu extends JFrame implements ActionListener{
 		add(ende);
 	}
 	public void actionPerformed(ActionEvent e){
-		if(e.getSource() == schliessen){
+		if(e.getSource() == starten){
 			start();
 		}
 		if(e.getSource() == info){
@@ -57,11 +59,13 @@ public class menu extends JFrame implements ActionListener{
 		}
 	}
 	public static void start(){
-		JFrame start = new JFrame();
-		start.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		start.setSize(800, 600);
-		start.setVisible(true);
-		start.add(new Start());
+		//JFrame start = new JFrame();
+		//start.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//start.setSize(550, 550);
+		//start.setVisible(true);
+		level1 = true;
+		Start start1 = new Start();
+		start1.neuesLevel("./src/level/level1.txt");
 	}
 	public static void config(){
 		
