@@ -8,7 +8,7 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class figur extends JPanel{
+public class Figur extends JPanel{
 	
 /**
 	 * 
