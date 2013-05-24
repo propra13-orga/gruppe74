@@ -1,5 +1,5 @@
 /**
- * Autor: Timon Günther
+ * Autor: Timon Gï¿½nther
  * Letzte Aktualisierung: 21.05.2013
  */
 
