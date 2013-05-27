@@ -13,13 +13,31 @@ public class Figur extends JPanel{
 /**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
 	private static boolean isDead = false;
+	public int xpos;
+	public int ypos;
+	
+	
 	public static boolean isDead() {
 		return isDead;
 	}
+	
 	public void setDead(boolean isDead) {
 		this.isDead = isDead;
 	}
 	
+	public void setx(int x){
+	xpos = x;
+	}
+	
+	public void sety(int y){
+		ypos = y;
+	}
+	
+	public int getx(){
+		return xpos;
+	}
+	public int gety(){
+		return ypos;
+	}
 	}
