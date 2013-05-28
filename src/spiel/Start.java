@@ -25,16 +25,10 @@ public class Start extends JPanel implements KeyListener{
 	public static Feld[][] feld = new Feld[11][11];
 	public int x = 1;
 	public int y = 1;
-	private ImageIcon h = new ImageIcon("./src/textures/hinten.gif");
-	private ImageIcon v = new ImageIcon("./src/textures/vorne.gif");
-	private ImageIcon r = new ImageIcon("./src/textures/rechts.gif");
-	private ImageIcon l = new ImageIcon("./src/textures/links.gif");
-	private Image imgh=h.getImage();
-	private Image imgv=v.getImage();
-	private Image imgr=r.getImage();
-	private Image imgl=l.getImage();
+	JLabel winbild = new JLabel (new ImageIcon("./src/textures/win.gif"));
+	JLabel losebild = new JLabel (new ImageIcon("./src/textures/lose.gif"));
 	private Figur f = new Figur();
-	
+	public int levelcount = 1;
 	
 	public void neuesLevel(String level){
 		String datei = "";
@@ -87,10 +81,21 @@ public class Start extends JPanel implements KeyListener{
 				feld[x][y] = new Feld(new ImageIcon("./src/textures/rechts.gif"));
 				f.setx(x);
 				f.sety(y);
+				Blockattribut.figurr(x, y);
 				panel.add(feld[x][y]);
 				
 				break;
-				}
+			case '4':
+				feld [x][y] = new Feld(new ImageIcon(".src/textures/stacheln.gif"));
+				Blockattribut.stacheln(x, y);
+				panel.add(feld[x][y]);
+				break;
+			case '5':
+				feld [x][y] = new Feld (new ImageIcon (".src/textures/ausgang.gif"));
+				Blockattribut.ausgang(x, y);
+				panel.add(feld[x][y]);
+				break;
+			
 		}
 		frame.add(panel); // fuege das JPanel in das JFrame (panel -> frame)
 		frame.setTitle("FIND-U-DRESS"); // setzte Fenstertitel
@@ -102,7 +107,7 @@ public class Start extends JPanel implements KeyListener{
 		frame.setFocusable(true);
 		frame.addKeyListener(this);
 	}
-	
+	}
 	
 
 	
@@ -126,9 +131,18 @@ public class Start extends JPanel implements KeyListener{
 			                xpos--;
 			                f.setx(xpos);
 			                feld[xpos][ypos] = new Feld(new ImageIcon("./src/textures/vorne.gif"));
+			                
 							panel.add(feld[xpos][ypos]);
 							System.out.println("Die Position der Figur ist: " + f.getx() + "/" + f.gety());
 			            	}
+			            	else if (feld[xpos--][ypos].stacheln = true){
+			            		lose();
+			            	}
+			            	else if (feld[xpos--][ypos].level1 = true)
+			            	{
+			            		nextlevel();
+			            		}
+			            		
 			            }
 			            else if (e.getKeyCode() == KeyEvent.VK_UP){
 			            	if (feld[xpos++][ypos].wand = false)
@@ -141,6 +155,13 @@ public class Start extends JPanel implements KeyListener{
 			                feld[xpos][ypos] = new Feld(new ImageIcon("./src/textures/hinten.gif"));
 							panel.add(feld[xpos][ypos]);
 							System.out.println("Die Position der Figur ist: " + f.getx() + "/" + f.gety());
+			            	}
+			            	else if (feld[xpos--][ypos].stacheln = true){
+			            		lose();
+			            	}
+			            	else if (feld[xpos++][ypos].level1 = true){
+			            	
+			            		nextlevel();
 			            	}
 			            }
 			            else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
@@ -155,6 +176,13 @@ public class Start extends JPanel implements KeyListener{
 							panel.add(feld[xpos][ypos]);
 							System.out.println("Die Position der Figur ist: " + f.getx() + "/" + f.gety());
 			            	}
+			            	else if (feld[xpos--][ypos].stacheln = true){
+			            		lose();
+			            	}
+			            	else if (feld[xpos++][ypos].level1 = true){
+				            	
+			            		nextlevel();
+			            	}
 			            }
 			            else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			            	if (feld[xpos][ypos++].wand = false)
@@ -168,6 +196,13 @@ public class Start extends JPanel implements KeyListener{
 							panel.add(feld[xpos][ypos]);
 							System.out.println("Die Position der Figur ist: " + f.getx() + "/" + f.gety());
 			            	}
+			            	else if (feld[xpos--][ypos].stacheln = true){
+			            		lose();
+			            	}
+			            	else if (feld[xpos++][ypos].level1 = true){
+				            	
+			            		nextlevel();
+			            	}
 			            }
 			        }
 		}
@@ -176,4 +211,55 @@ public class Start extends JPanel implements KeyListener{
 	{}
 	public void keyTyped(KeyEvent e)
 	{}
+	public void lose(){
+		f.setDead(true);
+		if (f.isDead() == true)
+		{
+			panel.add(losebild);
+			frame.add(panel);
+			try{
+			Thread.sleep(3000);
+			}
+			catch (Exception e){
+				
+			}
+			frame.dispose();
+		}
+	}
+	public void win(){
+		f.setDead(true);
+		if (f.isDead() == true)
+		{
+			panel.add(winbild);
+			frame.add(panel);
+			try{
+			Thread.sleep(3000);
+			}
+			catch (Exception e){
+				
+			}
+			frame.dispose();
+		}
+	}
+	public void nextlevel(){
+		levelcount++;
+		switch (levelcount){
+		case '2' : neuesLevel("./src/level/level2.txt");
+		break;
+		case '3' : neuesLevel("./src/level/level3.txt");
+		break;
+		case '4' : neuesLevel("./src/level/level4.txt");
+		break;
+		case '5' : neuesLevel("./src/level/level5.txt");
+		break;
+		case '6' : neuesLevel("./src/level/level6.txt");
+		break;
+		case '7' : neuesLevel("./src/level/level7.txt");
+		break;
+		case '8' : neuesLevel("./src/level/level8.txt");
+		break;
+		case '9' : neuesLevel("./src/level/level9.txt");
+		break;
+		}
+	}
 }
