@@ -86,7 +86,7 @@ public class Start extends JPanel implements KeyListener{
 				
 				break;
 			case '4':
-				feld [x][y] = new Feld(new ImageIcon(".src/textures/stacheln.gif"));
+				feld [x][y] = new Feld(new ImageIcon(".src/textures/stachelngif.gif"));
 				Blockattribut.stacheln(x, y);
 				panel.add(feld[x][y]);
 				break;
