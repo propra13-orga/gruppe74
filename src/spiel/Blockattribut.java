@@ -33,7 +33,7 @@ public class Blockattribut {
 		Start.feld[xloc][yloc].wand = false;
 	}
 	public static void stacheln(int xloc, int yloc){
-		Start.feld[xloc][yloc].setIcon(new ImageIcon(".src/textures/stacheln.gif"));
+		Start.feld[xloc][yloc].setIcon(new ImageIcon(".src/textures/stachelngif.gif"));
 		Start.feld[xloc][yloc].wand = false;
 		Start.feld[xloc][yloc].stacheln = true;
 	}
