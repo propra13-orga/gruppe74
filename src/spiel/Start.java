@@ -10,16 +10,8 @@ import java.io.IOException;
 
 import javax.swing.*;
 
-public class Start extends JPanel implements KeyListener{
+public class Start extends JPanel implements KeyListener {
 	
-	Image img;
-	
-	/*public Start(){
-		setFocusable(true);
-		//ImageIcon u = new ImageIcon("./src/textures/boden.gif");
-		//img = u.getImage();
-		Figur f = new Figur();
-	}*/
 	static JFrame frame = new JFrame();
 	static JPanel panel = new JPanel(new GridLayout(11, 11, 0, 0));
 	public static Feld[][] feld = new Feld[11][11];
@@ -29,6 +21,7 @@ public class Start extends JPanel implements KeyListener{
 	JLabel losebild = new JLabel (new ImageIcon("./src/textures/lose.gif"));
 	private Figur f = new Figur();
 	public int levelcount = 1;
+	final int MAX_SPEED = 100;
 	
 	public void neuesLevel(String level){
 		String datei = "";
@@ -83,7 +76,6 @@ public class Start extends JPanel implements KeyListener{
 				f.sety(y);
 				Blockattribut.figurr(x, y);
 				panel.add(feld[x][y]);
-				
 				break;
 			case '4':
 				feld [x][y] = new Feld(new ImageIcon(".src/textures/stachelngif.gif"));
@@ -106,10 +98,21 @@ public class Start extends JPanel implements KeyListener{
 		frame.setVisible(true); // zeige das Fenster an
 		frame.setFocusable(true);
 		frame.addKeyListener(this);
-	}
+		
+		}
+		while(frame.isActive()==true){
+			try{
+				float START = System.currentTimeMillis();
+				neuesLevel(level);
+				repaint();
+				float LAUFT = System.currentTimeMillis()-START;
+				if(MAX_SPEED > LAUFT){
+					Thread.sleep(MAX_SPEED-(int)LAUFT);
+				} 
+			} catch(Exception e){}
+		}
 	}
 	
-
 	
 	public void keyPressed(KeyEvent e)
 	{			
@@ -123,83 +126,82 @@ public class Start extends JPanel implements KeyListener{
 				int xpos = f.getx();
 				 int ypos = f.gety();
 			            if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-			            	if (feld[xpos--][ypos].wand = false)
+			            	if (feld[xpos--][ypos].wand == false)
 			            	{
 			            	feld[xpos][ypos] = new Feld(new ImageIcon("./src/textures/boden.gif"));
 							Blockattribut.boden(xpos, ypos);
 							panel.add(feld[xpos][ypos]);
-			                xpos--;
 			                f.setx(xpos);
-			                feld[xpos][ypos] = new Feld(new ImageIcon("./src/textures/vorne.gif"));
-			                
+			                feld[xpos][ypos] = new Feld(new ImageIcon("./src/textures/vorne.gif"));			               
 							panel.add(feld[xpos][ypos]);
+							panel.repaint();
 							System.out.println("Die Position der Figur ist: " + f.getx() + "/" + f.gety());
 			            	}
-			            	else if (feld[xpos--][ypos].stacheln = true){
+			            	else if (feld[xpos--][ypos].stacheln == true){
 			            		lose();
 			            	}
-			            	else if (feld[xpos--][ypos].level1 = true)
+			            	else if (feld[xpos--][ypos].level1 == true)
 			            	{
 			            		nextlevel();
 			            		}
 			            		
 			            }
 			            else if (e.getKeyCode() == KeyEvent.VK_UP){
-			            	if (feld[xpos++][ypos].wand = false)
+			            	if (feld[xpos++][ypos].wand == false)
 			            	{
 			            	feld[xpos][ypos] = new Feld(new ImageIcon("./src/textures/boden.gif"));
 							Blockattribut.boden(xpos, ypos);
 							panel.add(feld[xpos][ypos]);
-			                xpos++;
 			                f.setx(xpos);
 			                feld[xpos][ypos] = new Feld(new ImageIcon("./src/textures/hinten.gif"));
 							panel.add(feld[xpos][ypos]);
+							panel.repaint();
 							System.out.println("Die Position der Figur ist: " + f.getx() + "/" + f.gety());
 			            	}
-			            	else if (feld[xpos--][ypos].stacheln = true){
+			            	else if (feld[xpos++][ypos].stacheln == true){
 			            		lose();
 			            	}
-			            	else if (feld[xpos++][ypos].level1 = true){
+			            	else if (feld[xpos++][ypos].level1 == true){
 			            	
 			            		nextlevel();
 			            	}
 			            }
 			            else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-			            	if (feld[xpos][ypos--].wand = false)
+			            	if (feld[xpos][ypos--].wand == false)
 			            	{
 			            	feld[xpos][ypos] = new Feld(new ImageIcon("./src/textures/boden.gif"));
 							Blockattribut.boden(xpos, ypos);
 							panel.add(feld[xpos][ypos]);
-			                ypos--;
 			                f.sety(ypos);
 			                feld[xpos][ypos] = new Feld(new ImageIcon("./src/textures/links.gif"));
 							panel.add(feld[xpos][ypos]);
+							panel.repaint();
 							System.out.println("Die Position der Figur ist: " + f.getx() + "/" + f.gety());
 			            	}
-			            	else if (feld[xpos--][ypos].stacheln = true){
+			            	else if (feld[xpos][ypos--].stacheln == true){
 			            		lose();
 			            	}
-			            	else if (feld[xpos++][ypos].level1 = true){
+			            	else if (feld[xpos][ypos--].level1 == true){
 				            	
 			            		nextlevel();
 			            	}
 			            }
 			            else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			            	if (feld[xpos][ypos++].wand = false)
+			            	if (feld[xpos][ypos++].wand == false)
 			            	{
 			            	feld[xpos][ypos] = new Feld(new ImageIcon("./src/textures/boden.gif"));
 							Blockattribut.boden(xpos, ypos);
 							panel.add(feld[xpos][ypos]);
-			                ypos++;
 			                f.sety(ypos);
 			                feld[xpos][ypos] = new Feld(new ImageIcon("./src/textures/rechts.gif"));
 							panel.add(feld[xpos][ypos]);
+							panel.repaint();
 							System.out.println("Die Position der Figur ist: " + f.getx() + "/" + f.gety());
 			            	}
-			            	else if (feld[xpos--][ypos].stacheln = true){
+			            	else if (feld[xpos][ypos++].stacheln == true){
 			            		lose();
 			            	}
-			            	else if (feld[xpos++][ypos].level1 = true){
+			            	else if (feld[xpos][ypos++].level1 == true){
 				            	
 			            		nextlevel();
 			            	}
